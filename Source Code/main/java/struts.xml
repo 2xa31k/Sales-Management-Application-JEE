@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.devMode" value="false"/>
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources"/>
+    <package name="default" namespace="/" extends="struts-default">
+       <action name="login" class="action.LoginUser" method="loginU">
+             <result name="login" type="chain">articles</result>
+            <result name="success">/SignIn.jsp</result>
+        </action>
+        <action name="signup" class="action.UserUp">
+            <result name="fail">/SignUp.jsp</result>
+            <result name="newuser">/SignIn.jsp</result>
+        </action>
+        <action name="articles" class="action.ArticleList" method="listArticles">
+            <result name="success">/Articles.jsp</result>
+        </action>
+        <action name="view" class="action.ArticleList" method="viewArticle">
+            <result name="success">/ArticlePage.jsp</result>
+             
+        </action>
+                <action name="logout" class="action.LoginUser"
+            method="logout">
+            <result name="logout" type="chain">login</result>
+        </action>
+        <action name="addCommande" class="action.CommandeAction"
+                method="addCommande">
+            <result name="success" type="chain">articles</result>
+            <result name="403">/403.jsp</result>
+        </action>
+        <action name="viewCommands" class="action.CommandeAction"
+                method="listCommades">
+            <result name="success">Commands.jsp</result>
+            <result name="403">/403.jsp</result>
+        </action>
+        <action name="profile" class="action.UserUp"
+                method="Modifier">
+            <result name="success">profile.jsp</result>
+            <result name="403">/403.jsp</result>
+        </action>
+      
+      <action name="Allfacture" class="action.PdfAction" method="allCommands">
+		<result name="403">/403.jsp</result>
+		</action>
+		<action name="facture" class="action.PdfAction" method="factureCmd">
+		<result name="403">/403.jsp</result>
+		</action>
+		<action name="deleteAllCmd" class="action.CommandeAction" method="deleteAllCmd">
+		<result name="success" type="chain">viewCommands</result>
+		<result name="403">/403.jsp</result>
+		</action>
+		<action name="deleteCmd" class="action.CommandeAction" method="deleteCmd">
+		<result name="403">/403.jsp</result>
+		<result name="success" type="chain">viewCommands</result>
+		</action>
+	</package>
+</struts>
